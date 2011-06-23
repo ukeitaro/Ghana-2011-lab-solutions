@@ -46,6 +46,8 @@ def blog_detail(request, id, showComments=False):
 @csrf_exempt
 def comment_edit(request,id):
     comment = Comment.objects.get(pk=id)
+    if not request.user.username == comment.author:
+	return HttpResponse('no permissions to do this')
     if request.method == 'POST':					
         form = CommentForm(request.POST,instance=comment)
         if form.is_valid():

@@ -13,7 +13,7 @@
 	 <ul>
 	   <div>{{ comm.body|linebreaks }}</div>
 	   <div>Last updated on {{ comm.updated }}</div>           
-		<div><a href="/blog/editcomment/{{ comm.id }}">Edit Comment</a></div>
+	{% if request.user.username == comm.author %}<div><a href="/blog/editcomment/{{ comm.id }}">Edit Comment</a></div> {% endif %}
 	 </ul>
   {% endfor %}
   <br />
