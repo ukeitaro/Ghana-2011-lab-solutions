@@ -17,10 +17,12 @@
 	 </ul>
   {% endfor %}
   <br />
-  <div>New Comment {% if request.user.is_authenticated %}from {{ request.user.username }}{% endif %}</div>
+{% if request.user.is_authenticated %}
+  <div>New Comment from {{ request.user.username }}</div>
       <form method='post' action="">
         {{ form }}
         <input type='submit' name='Submit'>
       </form>
+{% endif %}
 </ul>
 {% endblock %}
