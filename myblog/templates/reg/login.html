@@ -1,3 +1,4 @@
+<a href='/blog/list'>Blog</a>
 {% if not logged_in %}
 	<form action="." method="post">{% csrf_token %}
 	{{ form.as_p }}

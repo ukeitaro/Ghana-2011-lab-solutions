@@ -20,7 +20,7 @@ def blog_list(request):
 class CommentForm(ModelForm):						#LAB06
     class Meta:
         model = Comment
-        exclude=['post']
+        exclude=['post', 'author']
 
 @csrf_exempt
 def blog_detail(request, id, showComments=False):
@@ -31,7 +31,7 @@ def blog_detail(request, id, showComments=False):
         print comments
 
     if request.method == 'POST':					#LAB06
-        comment = Comment(post=blog)
+        comment = Comment(post=blog, author=request.user.username)
         form = CommentForm(request.POST,instance=comment)
         if form.is_valid():
             form.save()
@@ -39,7 +39,7 @@ def blog_detail(request, id, showComments=False):
     else:
     	form = CommentForm()						#END LAB06
     t = loader.get_template('blog/detail.html')
-    c = Context({'blog':blog, 'comments':comments, 'form':form.as_p()})	#LAB06
+    c = Context({'blog':blog, 'comments':comments, 'form':form.as_p(), 'request':request})	#LAB06
     return HttpResponse(t.render(c))
     #return HttpResponse('gets the specific details page')
 

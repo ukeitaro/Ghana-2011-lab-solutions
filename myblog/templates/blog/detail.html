@@ -12,12 +12,12 @@
      <div>{{ comm.author }} on {{comm.created}} said ...</div>
 	 <ul>
 	   <div>{{ comm.body|linebreaks }}</div>
-	   <div>Last updated on {{ comm.updated }}</div>
-           <div><a href="/blog/editcomment/{{ comm.id }}">Edit Comment</a></div>
+	   <div>Last updated on {{ comm.updated }}</div>           
+		<div><a href="/blog/editcomment/{{ comm.id }}">Edit Comment</a></div>
 	 </ul>
   {% endfor %}
   <br />
-  <div>New Comment</div>
+  <div>New Comment {% if request.user.is_authenticated %}from {{ request.user.username }}{% endif %}</div>
       <form method='post' action="">
         {{ form }}
         <input type='submit' name='Submit'>
