@@ -1,0 +1,11 @@
+{% extends "blog/base.html" %}
+{% block content %}
+{% for blog in blog_list %}
+	<h2><a href="/blog/detail/{{ blog.id }}/True">{{ blog.title }}</a></h2>
+	<ul>
+	  <div>Created: {{ blog.created }}</div>
+          <div>Last updated: {{ blog.updated }}</div>
+          <div>{{ blog.body|linebreaks }}</div>            
+	</ul>
+{% endfor %}
+{% endblock %}
